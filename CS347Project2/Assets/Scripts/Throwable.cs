@@ -9,6 +9,15 @@ using UnityEngine;
 /// This script will add a rigidbody and box collider to this game object
 /// if they do not already exists. If they do already exist, then is will
 /// use the pre-existing ones.
+/// 
+/// If you intend to add special behaviours to throwable, such as implementing
+/// being able to use a throwable object while interacting with it, extend
+/// this class and then implement any of the following three functions:
+/// - OnSpecialActionStart()
+/// - OnSpecialActionStop()
+/// - OnSpecialAction()
+/// All other behaviours of Throwable will be inherited and will not need
+/// to be re-implemented.
 /// </summary>
 /// <author>Nathan Solomon</author>
 public class Throwable : MonoBehaviour
@@ -20,6 +29,7 @@ public class Throwable : MonoBehaviour
     // Internal State Elements
     private bool isSelected = false;
     private bool mouseHovering = false;
+    private bool specialAction = false;
 
     // Public Elements
     public float mass = 1;
@@ -67,19 +77,23 @@ public class Throwable : MonoBehaviour
         HandleMovement();
     }
 
+    // Called Whenever a mouse enters of this object
     void OnMouseEnter()
     {
         mouseHovering = true;
     }
 
+    // Called Whenever a mouse is exiting the object
     void OnMouseExit()
     {
         mouseHovering = false;
     }
 
+    /// <summary>
+    /// Handles all user input related to throwable objects
+    /// </summary>
     private void HandleInput()
     {
-        
 
         // TODO: Long term, we should re-write to use better input systems
         // like the input manager or the input axis
@@ -95,18 +109,79 @@ public class Throwable : MonoBehaviour
                 // TODO: Balance this equation
                 rigidBody.AddForce(Mathf.Log10(rigidBody.velocity.magnitude) * rigidBody.velocity * speedBoost, ForceMode2D.Impulse);
                 isSelected = false;
+
+                // Handles stopping special actions if they are occuring at this point in time
+                if (specialAction)
+                {
+                    OnSpecialActionStop();
+                }
+                specialAction = false;
             }
             
         }
 
+        // Handle Rotation of the object
         if (Input.GetAxis("Rotate Object") != 0 && isSelected)
         {
             float rotation = Input.GetAxis("Rotate Object");
-            rigidBody.AddTorque(-rotation * rotationFactor); 
+            rigidBody.AddTorque(-rotation * rotationFactor);
+        }
+
+        // Handle Special Actions
+        if (Input.GetAxis("Jump") == 0 && isSelected)
+        {
+            if (specialAction)
+            {
+                OnSpecialActionStop();
+            }
+            specialAction = false;
+        } else if (Input.GetAxis("Jump") != 0 && isSelected)
+        {
+            if (!specialAction)
+            {
+                OnSpecialActionStart();
+                specialAction = true;
+            }
+
+            OnSpecialAction();
         }
 
     }
 
+    /// <summary>
+    /// A function that can be overridden to simplify implementing
+    /// special behaviours. This function will be called the frame
+    /// where the special action button is clicked.
+    /// </summary>
+    public void OnSpecialActionStart()
+    {
+
+    }
+
+    /// <summary>
+    /// A function that can be overridden to simplify implementing
+    /// special behaviours. This function will be called the frame
+    /// where the special action button is released.
+    /// </summary>
+    public void OnSpecialActionStop()
+    {
+
+    }
+
+    /// <summary>
+    /// A function that can be overridden to simplify implementing
+    /// special behaviours. This function will be called the frames
+    /// where the special action button is held, including the frame
+    /// when it is first pressed.
+    /// </summary>
+    public void OnSpecialAction()
+    {
+
+    }
+
+    /// <summary>
+    /// Handles this objects movement
+    /// </summary>
     private void HandleMovement()
     {
         // If the object is selected, we should add force towards the mouse
@@ -116,9 +191,6 @@ public class Throwable : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 vectorToTarget = mousePosition - gameObject.transform.position;
             rigidBody.AddForce(vectorToTarget * suctionFactor, ForceMode2D.Force);
-        } else
-        {
-
         }
     }
 
