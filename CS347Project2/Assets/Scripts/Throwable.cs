@@ -37,8 +37,9 @@ public class Throwable : MonoBehaviour
     public float rotationFactor = 1;
     public float angularDrag = 1;
     public float linearDrag = 1;
-    public float speedBoost = 7;
-
+    public float speedBoost = 1.1F;
+    public Vector2 curve_vector = new Vector2(0, 0);
+    public Vector2 o_vector = new Vector2(0, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -62,12 +63,12 @@ public class Throwable : MonoBehaviour
 
         // Creating a new Box Collider if this object doesn't
         // already have one
-        if(boxCollider == null)
+        if (boxCollider == null)
         {
             // Creating Box Collider
             boxCollider = gameObject.AddComponent<BoxCollider2D>();
         }
-        
+
     }
 
     // Update is called once per frame
@@ -107,7 +108,8 @@ public class Throwable : MonoBehaviour
             if (isSelected)
             {
                 // TODO: Balance this equation
-                rigidBody.AddForce(Mathf.Log10(rigidBody.velocity.magnitude) * rigidBody.velocity * speedBoost, ForceMode2D.Impulse);
+                rigidBody.AddForce((rigidBody.velocity.magnitude) * rigidBody.velocity * speedBoost, ForceMode2D.Impulse);
+                o_vector = rigidBody.velocity;
                 isSelected = false;
 
                 // Handles stopping special actions if they are occuring at this point in time
@@ -117,7 +119,7 @@ public class Throwable : MonoBehaviour
                 }
                 specialAction = false;
             }
-            
+
         }
 
         // Handle Rotation of the object
@@ -135,7 +137,8 @@ public class Throwable : MonoBehaviour
                 OnSpecialActionStop();
             }
             specialAction = false;
-        } else if (Input.GetAxis("Jump") != 0 && isSelected)
+        }
+        else if (Input.GetAxis("Jump") != 0 && isSelected)
         {
             if (!specialAction)
             {
@@ -191,6 +194,11 @@ public class Throwable : MonoBehaviour
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 vectorToTarget = mousePosition - gameObject.transform.position;
             rigidBody.AddForce(vectorToTarget * suctionFactor, ForceMode2D.Force);
+        }
+        else
+        {
+            curve_vector = new Vector2(-o_vector.y, o_vector.x);
+            rigidBody.AddForce(rigidBody.angularVelocity / 1000 * curve_vector, ForceMode2D.Force);
         }
     }
 
