@@ -336,4 +336,6 @@ MonoBehaviour:
   rotationFactor: 1
   angularDrag: 1
   linearDrag: 1
-  speedBoost: 10
+  speedBoost: 1.1
+  curve_vector: {x: 0, y: 0}
+  o_vector: {x: 0, y: 0}
