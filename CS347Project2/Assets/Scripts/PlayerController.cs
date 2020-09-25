@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public Facing facing;
 
     // Variables
-    public float moveSpeed = .1f;
+    public float moveSpeed = 0.1f;
 
 
     // Start is called before the first frame update
@@ -35,6 +35,6 @@ public class PlayerController : MonoBehaviour
         forward = new Vector3(horizontalInput, verticalInput,0);
 
         transform.position += forward*moveSpeed;
-        //transform.Translate(forward.normalized * moveSpeed * Time.deltaTime);
+
     }
 }
