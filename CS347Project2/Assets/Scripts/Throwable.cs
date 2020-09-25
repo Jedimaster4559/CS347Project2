@@ -38,8 +38,8 @@ public class Throwable : MonoBehaviour
     public float angularDrag = 1;
     public float linearDrag = 1;
     public float speedBoost = 1.1F;
-    public Vector2 curve_vector = new Vector2(0, 0);
-    public Vector2 o_vector = new Vector2(0, 0);
+    private Vector2 curve_vector = new Vector2(0, 0);
+    private Vector2 o_vector = new Vector2(0, 0);
     // Start is called before the first frame update
     void Start()
     {
@@ -197,9 +197,9 @@ public class Throwable : MonoBehaviour
         }
         else
         {
-            curve_vector = new Vector2(-o_vector.y, o_vector.x);
-            rigidBody.AddForce(rigidBody.angularVelocity / 1000 * curve_vector, ForceMode2D.Force);
-        }
+            curve_vector = new Vector2(-o_vector.y, o_vector.x); // This gets a vector from the release point, and flips it 90 degrees
+            rigidBody.AddForce(rigidBody.angularVelocity / 1000 * curve_vector, ForceMode2D.Force); // This uses that curve vector, the direction of angular velocity to determine curve direction
+        } // Then uses that along with a flat devisor to reduve curve power, multiplies it all together to determine the smooth curve execution of the release
     }
 
 

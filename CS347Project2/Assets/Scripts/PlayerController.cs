@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private Vector3 forward = new Vector2(0, 0);
     // enum for facing
     public enum Facing { LEFT, RIGHT };
 
@@ -12,25 +13,28 @@ public class PlayerController : MonoBehaviour
     public Facing facing;
 
     // Variables
-    public float moveSpeed = 1.0f;
+    public float moveSpeed = 0.1f;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
-    {
-        
+    { 
+       
     }
 
     private void FixedUpdate()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
         float verticalInput = Input.GetAxisRaw("Vertical");
-        transform.Translate(new Vector3(horizontalInput, verticalInput, 0).normalized * moveSpeed * Time.deltaTime);
+        forward = new Vector3(horizontalInput, verticalInput,0);
+
+        transform.position += forward*moveSpeed;
+
     }
 }
