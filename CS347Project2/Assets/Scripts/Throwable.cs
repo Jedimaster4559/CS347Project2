@@ -38,8 +38,8 @@ public class Throwable : MonoBehaviour
     public float angularDrag = 1;
     public float linearDrag = 1;
     public float speedBoost = 1.1F;
-    public Vector2 curve_vector = new Vector2(0, 0);
-    public Vector2 o_vector = new Vector2(0, 0);
+    private Vector2 curve_vector = new Vector2(0, 0);
+    private Vector2 o_vector = new Vector2(0, 0);
     // Start is called before the first frame update
     void Start()
     {
