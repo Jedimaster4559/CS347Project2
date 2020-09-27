@@ -8,6 +8,7 @@ public class CameraMovement : MonoBehaviour
     // The target object to follow
     public GameObject target;
     public Camera cam;
+    public float stickyFactor = 1;
 
     // Margins to represent how close to the edge the player can get
     // to the edge. These values are as percentages. That means that
@@ -109,7 +110,7 @@ public class CameraMovement : MonoBehaviour
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x,- max_speed);
         }
-        rigidBody.velocity += updateVector/10;//Updates the velocity of the camera
+        rigidBody.velocity += updateVector * (stickyFactor / 10);//Updates the velocity of the camera
         
     }
 }

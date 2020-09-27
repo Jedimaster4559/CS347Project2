@@ -637,7 +637,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.1741085
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -681,10 +681,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 618026470}
   cam: {fileID: 0}
+  stickyFactor: 1
   verticalMargin: 0.25
   horizontalMargin: 0.25
   max_speed: 5
-  camera_speed: 1
+  camera_speed: 3
 --- !u!50 &1478908943
 Rigidbody2D:
   serializedVersion: 4
