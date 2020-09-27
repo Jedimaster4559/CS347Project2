@@ -23,7 +23,7 @@ using UnityEngine;
 public class Throwable : MonoBehaviour
 {
     // Hidden Components
-    private Rigidbody2D rigidBody;
+    public Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider;
 
     // Internal State Elements
@@ -33,11 +33,12 @@ public class Throwable : MonoBehaviour
 
     // Public Elements
     public float mass = 1;
+    public float damage = 0;
     public float suctionFactor = 1;
     public float rotationFactor = 1;
     public float angularDrag = 1;
     public float linearDrag = 1;
-    public float speedBoost = 1.1F;
+    public float speedBoost = 0.2f;
     private Vector2 curve_vector = new Vector2(0, 0);
     private Vector2 o_vector = new Vector2(0, 0);
     // Start is called before the first frame update
@@ -76,6 +77,7 @@ public class Throwable : MonoBehaviour
     {
         HandleInput();
         HandleMovement();
+        Calculate();
     }
 
     // Called Whenever a mouse enters of this object
@@ -199,7 +201,16 @@ public class Throwable : MonoBehaviour
         {
             curve_vector = new Vector2(-o_vector.y, o_vector.x); // This gets a vector from the release point, and flips it 90 degrees
             rigidBody.AddForce(rigidBody.angularVelocity / 1000 * curve_vector, ForceMode2D.Force); // This uses that curve vector, the direction of angular velocity to determine curve direction
+            if (rigidBody.velocity.magnitude < 2*mass)
+            {
+                rigidBody.velocity = new Vector2(0, 0);
+            }
         } // Then uses that along with a flat devisor to reduve curve power, multiplies it all together to determine the smooth curve execution of the release
+    }
+
+    void Calculate()
+    {
+        damage = rigidBody.velocity.magnitude * mass + Mathf.Abs(rigidBody.angularVelocity) / 100 * mass;
     }
 
 
