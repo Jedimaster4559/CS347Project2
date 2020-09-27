@@ -30,17 +30,18 @@ public class Throwable : MonoBehaviour
     private bool isSelected = false;
     private bool mouseHovering = false;
     private bool specialAction = false;
+    private float damage = 0;
+    private Vector2 curve_vector = new Vector2(0, 0);
+    private Vector2 o_vector = new Vector2(0, 0);
 
     // Public Elements
     public float mass = 1;
-    public float damage = 0;
     public float suctionFactor = 1;
     public float rotationFactor = 1;
     public float angularDrag = 1;
     public float linearDrag = 1;
     public float speedBoost = 0.2f;
-    private Vector2 curve_vector = new Vector2(0, 0);
-    private Vector2 o_vector = new Vector2(0, 0);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +78,7 @@ public class Throwable : MonoBehaviour
     {
         HandleInput();
         HandleMovement();
-        Calculate();
+        CalculateDamage();
     }
 
     // Called Whenever a mouse enters of this object
@@ -208,9 +209,20 @@ public class Throwable : MonoBehaviour
         } // Then uses that along with a flat devisor to reduve curve power, multiplies it all together to determine the smooth curve execution of the release
     }
 
-    void Calculate()
+    /// <summary>
+    /// Calculates and sets the amount of damage this object will damage when it collides with
+    /// a damageable object.
+    /// </summary>
+    void CalculateDamage()
     {
         damage = rigidBody.velocity.magnitude * mass + Mathf.Abs(rigidBody.angularVelocity) / 100 * mass;
+    }
+
+    // Called when this object collides with another game object that has collision enabled.
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Health health = collision.gameObject.GetComponent<Health>();
+        health.Damage(damage);
     }
 
 

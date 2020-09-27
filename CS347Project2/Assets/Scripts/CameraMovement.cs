@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Camera_Movement : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     // The target object to follow
     public GameObject target;

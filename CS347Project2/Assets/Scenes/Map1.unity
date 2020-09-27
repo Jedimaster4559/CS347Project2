@@ -136,7 +136,6 @@ GameObject:
   - component: {fileID: 617547918}
   - component: {fileID: 617547919}
   - component: {fileID: 617547920}
-  - component: {fileID: 617547921}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -313,19 +312,6 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &617547921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617547915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d084e29296da4640ae19d69a396506b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage_check: 0
 --- !u!1 &618026470
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +326,7 @@ GameObject:
   - component: {fileID: 618026476}
   - component: {fileID: 618026474}
   - component: {fileID: 618026475}
+  - component: {fileID: 618026477}
   m_Layer: 0
   m_Name: Terrin
   m_TagString: Untagged
@@ -473,12 +460,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 0}
   mass: 1
-  damage: 0
   suctionFactor: 1
   rotationFactor: 1
   angularDrag: 1
   linearDrag: 1
   speedBoost: 0.2
+--- !u!114 &618026477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618026470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  startingHealth: 100
+  currentHealth: 0
 --- !u!1 &657843848
 GameObject:
   m_ObjectHideFlags: 0
@@ -511,7 +512,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidBody: {fileID: 0}
   mass: 2
-  damage: 0
   suctionFactor: 1
   rotationFactor: 1
   angularDrag: 1
