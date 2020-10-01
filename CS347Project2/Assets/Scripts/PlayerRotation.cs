@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player_Rotation : MonoBehaviour
+public class PlayerRotation : MonoBehaviour
 {
     private Vector2 current_pos = new Vector2(0, 0);
     private Vector2 previous_pos = new Vector2(0, 0);
