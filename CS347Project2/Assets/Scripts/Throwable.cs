@@ -198,7 +198,7 @@ public class Throwable : MonoBehaviour
         else
         {
             curve_vector = new Vector2(-o_vector.y, o_vector.x); // This gets a vector from the release point, and flips it 90 degrees
-            rigidBody.AddForce(rigidBody.angularVelocity / 1000 * curve_vector, ForceMode2D.Force); // This uses that curve vector, the direction of angular velocity to determine curve direction
+            rigidBody.AddForce(rigidBody.angularVelocity / 10 * curve_vector, ForceMode2D.Force); // This uses that curve vector, the direction of angular velocity to determine curve direction
         } // Then uses that along with a flat devisor to reduve curve power, multiplies it all together to determine the smooth curve execution of the release
     }
 
