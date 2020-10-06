@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A Script to define the player
+/// Attaching this script to a game object can give the object player behavior
+/// </summary>
+/// <author>Yingren Wang</author>
+
 public class PlayerController : MonoBehaviour
 {
-    private Vector3 forward = new Vector2(0, 0);
     // enum for facing
     public enum Facing { LEFT, RIGHT };
 
@@ -12,9 +17,9 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public Facing facing;
 
-    // Variables
+    // variables for moving
     public float moveSpeed = 0.1f;
-
+    private Vector3 forward = new Vector2(0, 0);
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +40,5 @@ public class PlayerController : MonoBehaviour
         forward = new Vector3(horizontalInput, verticalInput,0);
 
         transform.position += forward*moveSpeed;
-
     }
 }
