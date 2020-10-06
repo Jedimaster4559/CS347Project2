@@ -17,7 +17,8 @@ using UnityEngine;
 ///     Colliding objects have to have a BoxCollider2D
 /// 
 /// Variable(s)
-///     int ViewConeSize - set the size of the viewcone
+///     int ViewConeSize - set the length of the ray of the viewcone
+///     float fov - filed of view - set the angle of the viewcone
 ///     
 /// TODO: decide what layer to use for all view blocking objects
 /// TODO: decide whether players/enemies should block views
@@ -47,17 +48,15 @@ public class FieldOfView : MonoBehaviour
     {
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
+        fov = 90f; // define the angle for field of view
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         viewConeSize = 5.0f;
-        fov = 90f; // define the angle for field of view
-        origin = Vector3.zero;
         rayCount = 50; // the more rays we have the finer the view cone would be
-        currentAngle = 0f;
-        // layerMask = LayerMask.GetMask("Character");
+        currentAngle = startingAngle;
         float angleIncrease = fov / rayCount;
         
         Vector3[] vertices = new Vector3[rayCount + 2]; // add two for ray zero and origin
