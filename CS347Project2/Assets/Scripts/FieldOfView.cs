@@ -19,9 +19,11 @@ using UnityEngine;
 /// Variable(s)
 ///     int ViewConeSize - set the size of the viewcone
 ///     
-/// TODO: decide what layer to use for all enemies and players
+/// TODO: decide what layer to use for all view blocking objects
+/// TODO: decide whether players/enemies should block views
+/// TODO: decide fov and viewcone size for the viewcone
 /// </summary>
-/// <author>Nathan Solomon</author>
+/// <author>Yingren Wang</author>
 
 public class FieldOfView : MonoBehaviour
 {
