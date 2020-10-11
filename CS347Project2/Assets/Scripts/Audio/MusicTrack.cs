@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+/// <summary>
+/// A class to handle controlling one music track in the game. This handles all technical
+/// details of looping audio when it is required. This class does not manage the transitions
+/// between multiple different pieces of music.
+/// </summary>
 public class MusicTrack : MonoBehaviour
 {
     /// <summary>
@@ -132,6 +137,7 @@ public class MusicTrack : MonoBehaviour
     /// </summary>
     private void LoopingState()
     {
+        // Check if we need to start the next audio clip
         float timeRemaining = currentClipLength - currentClip.time;
         if(timeRemaining <= currentFadeTime && nextClip == null)
         {
@@ -139,6 +145,10 @@ public class MusicTrack : MonoBehaviour
             nextClip.Play();
         }
 
+        // Cleanup the last audio clip if it is done.
+        // This allows us to start new audio clips as
+        // well as keeps music from taking up too much
+        // space in memory.
         if(timeRemaining <= 0)
         {
             Destroy(currentClip);
