@@ -168,14 +168,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b936381560608fd48a34a60811258ede, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  introClip: {fileID: 8300000, guid: f4ad8927e3cca0040aaba9ab7bfc9f61, type: 3}
+  introClip: {fileID: 8300000, guid: 255fd794665ce3944b2d2c7641526af5, type: 3}
   loopClip: {fileID: 8300000, guid: 7f21f9da5ece3e444a232adaaa85773b, type: 3}
   closeClip: {fileID: 0}
   mixer: {fileID: 24300002, guid: c0028f12b03074c43bbdd30aad478b7c, type: 2}
   playOnAwake: 1
   fades:
     introFadeIn: 0
-    introFadeOut: 1.813
+    introFadeOut: 2
     loopFadeIn: 0
     loopFadeOut: 2
     closingFadeIn: 0
@@ -758,8 +758,8 @@ GameObject:
   - component: {fileID: 1478908941}
   - component: {fileID: 1478908940}
   - component: {fileID: 1478908939}
-  - component: {fileID: 1478908942}
   - component: {fileID: 1478908943}
+  - component: {fileID: 1756746347}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -832,57 +832,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1756746345
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1756746346}
-  - component: {fileID: 1756746347}
-  m_Layer: 0
-  m_Name: Audio Engine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1756746346
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756746345}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.279574, y: -12.128704, z: -11.155184}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 150655240}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1756746347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478908938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 175a2db78871d574083639332aa5291d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 618026470}
-  cam: {fileID: 0}
-  stickyFactor: 1
-  verticalMargin: 0.25
-  horizontalMargin: 0.25
-  max_speed: 5
-  camera_speed: 3
 --- !u!50 &1478908943
 Rigidbody2D:
   serializedVersion: 4
@@ -904,3 +853,53 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!1 &1756746345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1756746346}
+  m_Layer: 0
+  m_Name: Audio Engine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1756746346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1756746345}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.279574, y: -12.128704, z: -11.155184}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 150655240}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1756746347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478908938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175a2db78871d574083639332aa5291d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 618026470}
+  cam: {fileID: 0}
+  stickyFactor: 1
+  verticalMargin: 0.25
+  horizontalMargin: 0.25
+  max_speed: 5
+  camera_speed: 3
