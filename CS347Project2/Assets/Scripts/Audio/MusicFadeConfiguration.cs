@@ -10,7 +10,7 @@ using UnityEngine;
 /// NOTE: a fade of 0 indicates instant transition between segments.
 /// </summary>
 [System.Serializable]
-public class FadeConfiguration
+public class MusicFadeConfiguration
 {
     public float introFadeIn = 0;
     public float introFadeOut = 0;

@@ -47,7 +47,7 @@ public class MusicTrack : MonoBehaviour
 
     // The configuration for the different
     // fade in and fade out periods
-    public FadeConfiguration fades;
+    public MusicFadeConfiguration fades;
 
     // Variables used for internal functions
     private AudioSource currentClip;
