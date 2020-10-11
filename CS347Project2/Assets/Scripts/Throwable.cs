@@ -23,13 +23,16 @@ using UnityEngine;
 public class Throwable : MonoBehaviour
 {
     // Hidden Components
-    private Rigidbody2D rigidBody;
+    public Rigidbody2D rigidBody;
     private BoxCollider2D boxCollider;
 
     // Internal State Elements
     private bool isSelected = false;
     private bool mouseHovering = false;
     private bool specialAction = false;
+    private float damage = 0;
+    private Vector2 curve_vector = new Vector2(0, 0);
+    private Vector2 o_vector = new Vector2(0, 0);
 
     // Public Elements
     public float mass = 1;
@@ -37,9 +40,8 @@ public class Throwable : MonoBehaviour
     public float rotationFactor = 1;
     public float angularDrag = 1;
     public float linearDrag = 1;
-    public float speedBoost = 1.1F;
-    private Vector2 curve_vector = new Vector2(0, 0);
-    private Vector2 o_vector = new Vector2(0, 0);
+    public float speedBoost = 0.2f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -76,6 +78,7 @@ public class Throwable : MonoBehaviour
     {
         HandleInput();
         HandleMovement();
+        CalculateDamage();
     }
 
     // Called Whenever a mouse enters of this object
@@ -199,7 +202,30 @@ public class Throwable : MonoBehaviour
         {
             curve_vector = new Vector2(-o_vector.y, o_vector.x); // This gets a vector from the release point, and flips it 90 degrees
             rigidBody.AddForce(rigidBody.angularVelocity / 1000 * curve_vector, ForceMode2D.Force); // This uses that curve vector, the direction of angular velocity to determine curve direction
+            if (rigidBody.velocity.magnitude < 2*mass)
+            {
+                rigidBody.velocity = new Vector2(0, 0);
+            }
         } // Then uses that along with a flat devisor to reduve curve power, multiplies it all together to determine the smooth curve execution of the release
+    }
+
+    /// <summary>
+    /// Calculates and sets the amount of damage this object will damage when it collides with
+    /// a damageable object.
+    /// </summary>
+    void CalculateDamage()
+    {
+        damage = rigidBody.velocity.magnitude * mass + Mathf.Abs(rigidBody.angularVelocity) / 100 * mass;
+    }
+
+    // Called when this object collides with another game object that has collision enabled.
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Health health = collision.gameObject.GetComponent<Health>();
+        if (health != null)
+        {
+            health.Damage(damage);
+        }
     }
 
 
