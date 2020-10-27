@@ -24,17 +24,20 @@ public class EnemyController : MonoBehaviour
 
     public float rotateFrequency = 1;
 
+    private Camera camera;
+
     // Start is called before the first frame update
     void Start()
     {
         viewCone.transform.parent = this.transform;
         viewCone.SetOrigin(transform.position);
+        camera = Camera.main;
     }
 
     // Update is called once per frame
     void Update()
     {
-        aimDir = new Vector3(0, -1, 0);
+        //aimDir = (Input.mousePosition - this.transform.position).normalized;
         viewCone.SetAimDirection(aimDir);
     }
 }

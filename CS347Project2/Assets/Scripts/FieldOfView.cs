@@ -15,6 +15,11 @@ using UnityEngine;
 ///     
 /// In order to have walls blocking the viewcone:
 ///     Colliding objects have to have a BoxCollider2D
+///     
+/// Appearance of the view cone:
+///     Create a new material in the project view
+///     Choose "sprite" as the shader of the material
+///     Set up color and the alpha (for transparency) value for the material in the inspector view
 /// 
 /// Variable(s)
 ///     int ViewConeSize - set the length of the ray of the viewcone
@@ -52,7 +57,7 @@ public class FieldOfView : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void Update()
     {
         viewConeSize = 5.0f;
         rayCount = 50; // the more rays we have the finer the view cone would be
@@ -70,7 +75,7 @@ public class FieldOfView : MonoBehaviour
         for (int i = 0; i <= rayCount; i++)
         {
             Vector3 vertex;
-            layerMask = LayerMask.GetMask("Wall");
+            layerMask = LayerMask.GetMask("Walls");
             RaycastHit2D raycastHit2D = Physics2D.Raycast(origin, GetVectorFromAngle(currentAngle), viewConeSize, layerMask);
 
             // detect collision
@@ -148,6 +153,14 @@ public class FieldOfView : MonoBehaviour
     {
         float angleRad = angle * (Mathf.PI / 180f);
         return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
+    }
+
+    /// <summary>
+    /// Generate a random direction
+    /// </summary>
+    public static Vector3 GetRandomDir()
+    {
+        return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
 }
 
