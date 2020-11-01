@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Allows us to make a Game Object slowly grow and shrink in size.
+/// </summary>
 public class UIPulse : MonoBehaviour
 {
     // The maximum size the object grows to
