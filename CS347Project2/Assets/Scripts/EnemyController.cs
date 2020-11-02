@@ -8,6 +8,11 @@ using UnityEngine;
 /// 
 /// This script requires the game object to have a rigidbody2D and a box collider2D.
 /// 
+/// Variables:
+///     tillNextConeDirTime: keep track of how long till the next change of cone direction
+///     coneDirPeriod: after coneDirPeriod seconds of time, the cone should change the direction
+///     conDirChangeFrequency: speed of updating the cone from current position to the new position
+/// 
 /// </summary>
 /// <author>Yingren Wang</author>
 
@@ -20,10 +25,12 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D rb2d;
     private BoxCollider2D bc2d;
 
+    private Vector3 coneDir;
     private Vector3 aimDir;
 
     private float tillNextConeDirTime = 0.0f;
     public float coneDirPeriod = 2.0f;
+    public float coneDirChageFrequency = 1.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +53,7 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         //aimDir = (Input.mousePosition - this.transform.position).normalized;
+
         viewCone.SetAimDirection(aimDir);
         
         tillNextConeDirTime -= Time.deltaTime;
@@ -53,9 +61,10 @@ public class EnemyController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // once it's time for the view cone to change direction, set the new aimDir to a random direction
         if (tillNextConeDirTime <= 0)
         {
-            aimDir = GetRandomDir();
+            coneDir = GetRandomDir();
             tillNextConeDirTime = coneDirPeriod;
         }
     }
