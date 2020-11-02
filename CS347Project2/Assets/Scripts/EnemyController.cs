@@ -22,16 +22,24 @@ public class EnemyController : MonoBehaviour
 
     private Vector3 aimDir;
 
-    public float rotateFrequency = 1;
-
-    private Camera camera;
+    private float tillNextConeDirTime = 0.0f;
+    public float coneDirPeriod = 2.0f;
 
     // Start is called before the first frame update
     void Start()
     {
         viewCone.transform.parent = this.transform;
         viewCone.SetOrigin(transform.position);
-        camera = Camera.main;
+        aimDir = new Vector3(-1.0f, 0.0f, 0.0f);
+        tillNextConeDirTime = coneDirPeriod;
+    }
+    
+    /// <summary>
+    /// Generate a random direction
+    /// </summary>
+    public static Vector3 GetRandomDir()
+    {
+        return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
     }
 
     // Update is called once per frame
@@ -39,5 +47,16 @@ public class EnemyController : MonoBehaviour
     {
         //aimDir = (Input.mousePosition - this.transform.position).normalized;
         viewCone.SetAimDirection(aimDir);
+        
+        tillNextConeDirTime -= Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        if (tillNextConeDirTime <= 0)
+        {
+            aimDir = GetRandomDir();
+            tillNextConeDirTime = coneDirPeriod;
+        }
     }
 }

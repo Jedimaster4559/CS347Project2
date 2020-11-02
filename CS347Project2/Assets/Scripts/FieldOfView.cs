@@ -155,12 +155,5 @@ public class FieldOfView : MonoBehaviour
         return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
     }
 
-    /// <summary>
-    /// Generate a random direction
-    /// </summary>
-    public static Vector3 GetRandomDir()
-    {
-        return new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized;
-    }
 }
 
