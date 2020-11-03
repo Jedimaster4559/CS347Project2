@@ -70,6 +70,6 @@ public class Health : MonoBehaviour
     {
         // When an object health gets to less than 0, it should
         // be destroyed.
-        Destroy(this);
+        Destroy(this.gameObject);
     }
 }
