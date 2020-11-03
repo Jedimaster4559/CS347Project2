@@ -15,19 +15,38 @@ public class MenuHandler : MonoBehaviour
 
     // Menu Objects
     public GameObject creditsMenu;
+    public GameObject pauseMenu;
+    public GameObject optionsMenu;
 
 
     // Update is called once per frame
     void Update()
     {
-        
+        ProcessInput();
     }
 
     private void ProcessInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // TODO: Add this implementation on pause menu implementation
+            // Hide any open menus
+            bool contextFound = false;
+            if (showCreditsMenu)
+            {
+                ToggleCredits();
+                contextFound = true;
+            }
+            if (showPauseMenu)
+            {
+                ResumeGame();
+                contextFound = true;
+            }
+
+            // Open the pause menu if we didn't leave a menu
+            if (!contextFound)
+            {
+                PauseGame();
+            }
         }
     }
 
@@ -44,6 +63,9 @@ public class MenuHandler : MonoBehaviour
     /// </summary>
     public void QuitToMain()
     {
+        if (showPauseMenu){
+            ResumeGame();
+        }
         SceneManager.LoadScene("Start");
     }
 
@@ -62,5 +84,19 @@ public class MenuHandler : MonoBehaviour
     {
         showCreditsMenu = !showCreditsMenu;
         creditsMenu.SetActive(showCreditsMenu);
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        showPauseMenu = !showPauseMenu;
+        pauseMenu.SetActive(showPauseMenu);
+    }
+
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+        showPauseMenu = !showPauseMenu;
+        pauseMenu.SetActive(showPauseMenu);
     }
 }
