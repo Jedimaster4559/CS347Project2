@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-<<<<<<< HEAD
 /// <summary>
 /// Handles the menus and the user's interactions with them.
 /// </summary>
-=======
->>>>>>> master
 public class MenuHandler : MonoBehaviour
 {
     // Private State Variables
@@ -21,17 +18,13 @@ public class MenuHandler : MonoBehaviour
 
     // Menu Objects
     public GameObject creditsMenu;
-<<<<<<< HEAD
     public GameObject pauseMenu;
     public GameObject optionsMenu;
-=======
->>>>>>> master
 
 
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
         ProcessInput();
     }
 
@@ -40,16 +33,10 @@ public class MenuHandler : MonoBehaviour
     /// so that it will either exit open menus or display the pause
     /// menu.
     /// </summary>
-=======
-        
-    }
-
->>>>>>> master
     private void ProcessInput()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-<<<<<<< HEAD
             // Hide any open menus
             bool contextFound = false;
             if (showCreditsMenu)
@@ -68,9 +55,6 @@ public class MenuHandler : MonoBehaviour
             {
                 PauseGame();
             }
-=======
-            // TODO: Add this implementation on pause menu implementation
->>>>>>> master
         }
     }
 
@@ -87,12 +71,10 @@ public class MenuHandler : MonoBehaviour
     /// </summary>
     public void QuitToMain()
     {
-<<<<<<< HEAD
         if (showPauseMenu){
             ResumeGame();
         }
-=======
->>>>>>> master
+
         SceneManager.LoadScene("Start");
     }
 
@@ -112,7 +94,6 @@ public class MenuHandler : MonoBehaviour
         showCreditsMenu = !showCreditsMenu;
         creditsMenu.SetActive(showCreditsMenu);
     }
-<<<<<<< HEAD
 
     /// <summary>
     /// Pauses the game.
@@ -136,6 +117,5 @@ public class MenuHandler : MonoBehaviour
         showPauseMenu = !showPauseMenu;
         pauseMenu.SetActive(showPauseMenu);
     }
-=======
->>>>>>> master
+
 }
