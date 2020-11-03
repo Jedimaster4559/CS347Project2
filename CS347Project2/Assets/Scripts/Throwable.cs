@@ -31,6 +31,7 @@ public class Throwable : MonoBehaviour
     private bool mouseHovering = false;
     private bool specialAction = false;
     private float damage = 0;
+    public float max_speed = 25;
     private Vector2 curve_vector = new Vector2(0, 0);
     private Vector2 o_vector = new Vector2(0, 0);
 
@@ -40,7 +41,7 @@ public class Throwable : MonoBehaviour
     public float rotationFactor = 1;
     public float angularDrag = 1;
     public float linearDrag = 1;
-    public float speedBoost = 0.2f;
+    public float speedBoost = 1.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -111,7 +112,7 @@ public class Throwable : MonoBehaviour
             if (isSelected)
             {
                 // TODO: Balance this equation
-                rigidBody.AddForce((rigidBody.velocity.magnitude) * rigidBody.velocity * speedBoost, ForceMode2D.Impulse);
+                rigidBody.AddForce(rigidBody.velocity * speedBoost, ForceMode2D.Impulse);
                 o_vector = rigidBody.velocity;
                 isSelected = false;
 
@@ -196,7 +197,8 @@ public class Throwable : MonoBehaviour
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 vectorToTarget = mousePosition - gameObject.transform.position;
-            rigidBody.AddForce(vectorToTarget * suctionFactor, ForceMode2D.Force);
+            if (rigidBody.velocity.magnitude<max_speed)
+                rigidBody.AddForce(vectorToTarget * suctionFactor, ForceMode2D.Force);
         }
         else
         {
@@ -205,6 +207,7 @@ public class Throwable : MonoBehaviour
             if (rigidBody.velocity.magnitude < 2*mass)
             {
                 rigidBody.velocity = new Vector2(0, 0);
+                rigidBody.angularVelocity = 0;
             }
         } // Then uses that along with a flat devisor to reduve curve power, multiplies it all together to determine the smooth curve execution of the release
     }
