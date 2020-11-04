@@ -10,6 +10,7 @@ public class Scout : MonoBehaviour
     private bool up = true;
     public float rate = 0.8f;
     public GameObject player;
+
     public GameObject bulletPrefab;
     public float radius = 200;
 
@@ -19,7 +20,6 @@ public class Scout : MonoBehaviour
     // control how often to shoot
     private float projectilePeriod;
     private float timeTillNextProjectile;
-
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +40,7 @@ public class Scout : MonoBehaviour
     void Update()
     {
         timeTillNextProjectile -= Time.deltaTime;
+
         var x = this.gameObject.GetComponent<Rigidbody2D>().position.x;
         var y = this.gameObject.GetComponent<Rigidbody2D>().position.y;
         var x2 = player.GetComponent<Rigidbody2D>().position.x;
