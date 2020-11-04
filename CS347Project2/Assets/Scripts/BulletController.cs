@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 /// <summary>
@@ -22,8 +23,9 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    // speed of shooting bullet
-    public float speed;
+    // shooting bullet properties
+    public float speed = 0.5f;
+    public float bulletDamage = 6.0f;
 
     // GameObjects
     public GameObject enemy;
@@ -38,10 +40,12 @@ public class BulletController : MonoBehaviour
     private float bulletAllowedTime = 10.0f;
     private float timeTillDestroy;
 
+    // serialized property 
+    private SerializedProperty playerHealth;
+
     // Start is called before the first frame update
     void Start()
     {
-        speed = 0.01f;
         enemy = Resources.Load("Prefabs/EE") as GameObject;
 
         timeTillDestroy = bulletAllowedTime;
@@ -65,6 +69,7 @@ public class BulletController : MonoBehaviour
 
         // set the bullet new position depending on enemy's position to the player's position
         // take a look at Scout.cs variable isToPlayersRight to check the logic of updating bool shouldFlip
+
         if (shouldFlip)
             transform.position -= displacement;
         else
@@ -77,6 +82,15 @@ public class BulletController : MonoBehaviour
 
         if (!collision.gameObject.GetComponent<Scout>() && !collision.gameObject.GetComponent<BulletController>())
         {
+            if (collision.gameObject.GetComponent<PlayerController>())
+            {
+                // minus 6.0 bullet damage if get hit
+                Health health = collision.gameObject.GetComponent<Health>();
+                if (health != null)
+                {
+                    health.Damage(bulletDamage);
+                }
+            }
             // bullet will be destroied colliding into anything other than enemy and other bullets
             Destroy(this.gameObject);
         }
