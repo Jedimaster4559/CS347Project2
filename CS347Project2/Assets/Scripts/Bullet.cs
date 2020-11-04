@@ -10,9 +10,9 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.rotation = GetComponentInParent<EE>().transform.rotation;
+       // transform.rotation = GetComponentInParent<EE>().transform.rotation;
         rigidBody = this.GetComponent<Rigidbody2D>();
-        rigidBody.velocity= GetComponentInParent<EE>().transform.right*speed;
+       // rigidBody.velocity= GetComponentInParent<EE>().transform.right*speed;
     }
 
     // Update is called once per frame

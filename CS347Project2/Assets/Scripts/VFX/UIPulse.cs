@@ -41,7 +41,7 @@ public class UIPulse : MonoBehaviour
             percent = 1 - percent;
         }
 
-        Debug.Log(percent);
+        //Debug.Log(percent);
 
         // Calculate Size and Scale Object
         transform.localScale = ((maxActual - minActual) * percent) + minActual;
