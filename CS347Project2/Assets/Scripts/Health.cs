@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// A class to manage the health of a game object.
@@ -13,15 +14,35 @@ public class Health : MonoBehaviour
     // Health Starting Configuration
     public float maxHealth = 100;
     public float startingHealth = 100;
+    public bool showHealthBar = false;
+    public HealthBarConfiguration healthConfig;
 
     // Health Detail
     [SerializeField]
     private float currentHealth;
 
+    // Health Bar Configuration
+    private GameObject healthBar;
+    private Image healthSlider;
+    private Quaternion fixedRotation;
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = startingHealth;
+
+        // Configure Health Bar
+        healthBar = Instantiate(Resources.Load("Prefabs/Health Bar")) as GameObject;
+        healthBar.transform.SetParent(transform);
+        healthSlider = healthBar.transform.Find("Health Indicator").GetComponent<Image>();
+        healthSlider.color = healthConfig.healthBarColor;
+        // Locks health bar rotation
+        fixedRotation = healthBar.transform.rotation;
+
+        if (!showHealthBar)
+        {
+            healthBar.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -31,6 +52,20 @@ public class Health : MonoBehaviour
         {
             OnDeath();
         }
+
+        healthSlider.fillAmount = currentHealth / maxHealth;
+    }
+
+    void LateUpdate()
+    {
+        ResetHealthBarPosition();
+    }
+
+    void ResetHealthBarPosition()
+    {
+        healthBar.transform.rotation = fixedRotation;
+        healthBar.transform.position = transform.position;
+        healthBar.transform.position += new Vector3(healthConfig.translateX, healthConfig.translateY);
     }
 
     /// <summary>

@@ -154,4 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   startingHealth: 100
+  showHealthBar: 1
+  healthConfig:
+    translateX: 0
+    translateY: 0.6
+    healthBarColor: {r: 1, g: 0, b: 0, a: 1}
   currentHealth: 0
