@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Allows for configuration of a health bar.
+/// </summary>
 [System.Serializable]
 public class HealthBarConfiguration
 {

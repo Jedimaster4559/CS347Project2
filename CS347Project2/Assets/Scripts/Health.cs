@@ -56,11 +56,16 @@ public class Health : MonoBehaviour
         healthSlider.fillAmount = currentHealth / maxHealth;
     }
 
+    // Update run at the end of the frame
     void LateUpdate()
     {
         ResetHealthBarPosition();
     }
 
+    /// <summary>
+    /// Resets the rotation and position of the Health Bar. Prevents
+    /// these from moving.
+    /// </summary>
     void ResetHealthBarPosition()
     {
         healthBar.transform.rotation = fixedRotation;
