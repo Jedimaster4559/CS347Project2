@@ -2,59 +2,87 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A Script to controll bullet
+/// Bullet attached with this controller will detect collision, if the bullet collides with anything other than enemy
+///     and other bullets, the bullet gameObject will be destroyed.
+/// 
+/// This script requires the game object that needs to be hit to have a rigidbody2D and a collider2D.
+/// 
+/// Variables:
+///     speed: bullet movement speed
+///     shouldFlip: decide whether the sprite of the bullet should flip horizontally
+///     bulletAllowedTime: time period that a bullet is allowed to exist even if it doesn't hit anything
+/// </summary>
+/// 
+/// <author>
+///     Kristian Wells
+///     Yingren Wang
+/// </author>
+
 public class BulletController : MonoBehaviour
 {
+    // speed of shooting bullet
     public float speed;
+
+    // GameObjects
     public GameObject enemy;
     public GameObject player;
+
+    // whether should flip the sprite of bullet
+    // variable is set depending on the relative position of enemy to the player
+    public bool shouldFlip = false;
+
+    // variable to destroy bullet after a certain time period
+    [SerializeField]
+    private float bulletAllowedTime = 10.0f;
+    private float timeTillDestroy;
 
     // Start is called before the first frame update
     void Start()
     {
-        speed = 1.0f;
-        // enemy = GameObject.Find("Enemy");
-        // player = GameObject.Find("Player");
+        speed = 0.01f;
+        enemy = Resources.Load("Prefabs/EE") as GameObject;
+
+        timeTillDestroy = bulletAllowedTime;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timeTillDestroy -= Time.deltaTime;
+        if(timeTillDestroy <= 0)
+        {
+            // destroy the bullet after 10 seconds even if it hasn't hit anything
+            Destroy(this.gameObject);
+        }
     }
 
     void FixedUpdate()
     {
-        // bullets get shot
+        // bullets get shot towards the direction of the enemy facing
         var displacement = transform.right * speed;
-        var newPosition = transform.position - displacement;
 
-        transform.position = newPosition;
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.GetComponent<BulletController>())
-        {
-            // bullets can touch other bullets
-        }
-        else if (collision.gameObject.GetComponent<Scout>())
-        {
-            // bullets can touch enemy
-        }
+        // set the bullet new position depending on enemy's position to the player's position
+        // take a look at Scout.cs variable isToPlayersRight to check the logic of updating bool shouldFlip
+        if (shouldFlip)
+            transform.position -= displacement;
         else
-        {
-            Destroy(gameObject);
-        }
+            transform.position += displacement;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.name != enemy.name)
+        CircleCollider2D collider = collision.otherCollider as CircleCollider2D;
+
+        if (!collision.gameObject.GetComponent<Scout>() && !collision.gameObject.GetComponent<BulletController>())
         {
-            Destroy(this);
+            // bullet will be destroied colliding into anything other than enemy and other bullets
+            Destroy(this.gameObject);
         }
         else
         {
-
+            // bullet won't be destroied colliding into enemy and other bullets
         }
     }
 }

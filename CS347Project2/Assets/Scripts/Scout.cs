@@ -2,6 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// A Script to controll enemy
+/// 
+/// Enemy has random rotation with an invisible "viewCone"
+///     if player gets into the cone, enemy will stop random rotation and focus on the player and start shooting
+/// 
+/// This script requires the game object that represents enemy to have a rigidbody2D.
+/// 
+/// Variables:
+/// ---Rotation Related Variables---
+/// 
+/// ---Shoot Related Variables---
+///     vecToPlayer: vector from enemy to player
+///     isToPlayersRight: boolean value, if enemy is to player's right, true; otherwise, false
+///     bulletOffset: offset for bullet respond position
+///     projectilePeriod: time period between two shooting events
+/// </summary>
+/// 
+/// <author>
+///     Kristian Wells
+///     Yingren Wang
+/// </author>
+
 public class Scout : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
@@ -14,12 +37,17 @@ public class Scout : MonoBehaviour
     public GameObject bulletPrefab;
     public float radius = 200;
 
+    // bullet's angle when being initiated
     public float bulletAngle;
-    public float shootingTime = 0.1f;
 
     // control how often to shoot
     private float projectilePeriod;
     private float timeTillNextProjectile;
+
+    [SerializeField]
+    private Vector3 bulletOffset;
+    private bool isToPlayersRight;
+    private Vector3 vecToPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +60,10 @@ public class Scout : MonoBehaviour
         timeTillNextProjectile = projectilePeriod;
     }
 
- 
-    
-
-
     // Update is called once per frame
     void Update()
     {
+        // update time for shooting
         timeTillNextProjectile -= Time.deltaTime;
 
         var x = this.gameObject.GetComponent<Rigidbody2D>().position.x;
@@ -48,9 +73,10 @@ public class Scout : MonoBehaviour
         radius = Mathf.Sqrt((x - x2) * (x - x2) + (y - y2) * (y - y2));
         Vector2 toVector = player.transform.position - transform.position;
         float angleToTarget = Vector2.SignedAngle(transform.right, toVector);
-        float test = Vector2.Angle(transform.right, toVector);
+        float viewCone = Vector2.Angle(transform.right, toVector);
 
-        if (radius > 4 || test > 45)
+        // viewCone functionality
+        if (radius > 4 || viewCone > 45)
         {
             if (up == true && rigidBody.rotation <= top)
                 up = false;
@@ -63,14 +89,28 @@ public class Scout : MonoBehaviour
         }
         else
         {
+            // make the rotation less precise
             rigidBody.rotation += angleToTarget*rate/6;
+
+            // shoot every projectilePeriod time
             if (timeTillNextProjectile <= 0)
             {
                 shoot();
                 timeTillNextProjectile = projectilePeriod;
             }
         }
+
+        // decide the position of enemy relative to player's position
+        vecToPlayer = player.transform.position - transform.position;
         
+        if(vecToPlayer.x <= 0)
+        {
+            isToPlayersRight = true;
+        }
+        else
+        {
+            isToPlayersRight = false;
+        }
     }
 
     private void FixedUpdate()
@@ -82,29 +122,32 @@ public class Scout : MonoBehaviour
     }
 
     void shoot() {
-        //Determine directions using Euler angles
+        // Determine directions using Euler angles
         Vector3 eulerAngle1 = new Vector3(0, 0, bulletAngle);
 
-        //Convert to Quaternions for Unity use
+        // Convert to Quaternions for Unity use
         var quaternion1 = Quaternion.Euler(eulerAngle1);
 
-        var bulletOffset = new Vector3(0.0f, 0.0f, 0.0f);
-        //Create bullets
-        var bullet = Instantiate(bulletPrefab, transform.position + bulletOffset, quaternion1);
+        // generate bullet offset depending on vector to player
+        var bulletOffset = new Vector3(vecToPlayer.x * 0.2f, vecToPlayer.y * 0.2f, 0.0f);
+
+        // Create bullets
+        var bullet = Instantiate(Resources.Load("Prefabs/Bullet"), transform.position + bulletOffset, quaternion1) as GameObject;
+        if (isToPlayersRight)
+        {
+            bullet.GetComponent<BulletController>().shouldFlip = true;
+            bullet.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else
+        {
+            bullet.GetComponent<BulletController>().shouldFlip = false;
+            bullet.GetComponent<SpriteRenderer>().flipX = false;
+        }
 
         // assign player and enemy game objects to the initiated bullet
         var controller = bullet.GetComponent<BulletController>();
         controller.player = player;
         controller.enemy = this.gameObject;
-
-
-        // bullet.transform.LookAt(player.transform);
-
-        ////If bullets are fired facing left, need to mirror sprite
-        //if (facing == Facing.LEFT)
-        //{
-        //    bullet1.GetComponent<SpriteRenderer>().flipY = false;
-        //}
     }
 }
     
