@@ -40,9 +40,6 @@ public class BulletController : MonoBehaviour
     private float bulletAllowedTime = 10.0f;
     private float timeTillDestroy;
 
-    // serialized property 
-    private SerializedProperty playerHealth;
-
     // Start is called before the first frame update
     void Start()
     {

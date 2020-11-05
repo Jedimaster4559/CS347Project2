@@ -41,7 +41,7 @@ public class Scout : MonoBehaviour
     public float bulletAngle;
 
     // control how often to shoot
-    private float projectilePeriod;
+    private float projectilePeriod = 0.5f;
     private float timeTillNextProjectile;
 
     [SerializeField]
@@ -56,69 +56,79 @@ public class Scout : MonoBehaviour
         rigidBody.SetRotation(top);
 
         // set variables for shooting frequency
-        projectilePeriod = 1.0f;
         timeTillNextProjectile = projectilePeriod;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // update time for shooting
-        timeTillNextProjectile -= Time.deltaTime;
-
-        var x = this.gameObject.GetComponent<Rigidbody2D>().position.x;
-        var y = this.gameObject.GetComponent<Rigidbody2D>().position.y;
-        var x2 = player.GetComponent<Rigidbody2D>().position.x;
-        var y2 = player.GetComponent<Rigidbody2D>().position.y;
-        radius = Mathf.Sqrt((x - x2) * (x - x2) + (y - y2) * (y - y2));
-        Vector2 toVector = player.transform.position - transform.position;
-        float angleToTarget = Vector2.SignedAngle(transform.right, toVector);
-        float viewCone = Vector2.Angle(transform.right, toVector);
-
-        // viewCone functionality
-        if (radius > 4 || viewCone > 45)
+        if (player != null)
         {
-            if (up == true && rigidBody.rotation <= top)
-                up = false;
-            if (up == false && rigidBody.rotation >= bottom)
-                up = true;
-            if (up == true)
-                rigidBody.rotation -= rate;
-            if (up == false)
-                rigidBody.rotation += rate;
-        }
-        else
-        {
-            // make the rotation less precise
-            rigidBody.rotation += angleToTarget*rate/6;
+            // update time for shooting
+            timeTillNextProjectile -= Time.deltaTime;
 
-            // shoot every projectilePeriod time
-            if (timeTillNextProjectile <= 0)
+            var x = this.gameObject.GetComponent<Rigidbody2D>().position.x;
+            var y = this.gameObject.GetComponent<Rigidbody2D>().position.y;
+            var x2 = player.GetComponent<Rigidbody2D>().position.x;
+            var y2 = player.GetComponent<Rigidbody2D>().position.y;
+            radius = Mathf.Sqrt((x - x2) * (x - x2) + (y - y2) * (y - y2));
+            Vector2 toVector = player.transform.position - transform.position;
+            float angleToTarget = Vector2.SignedAngle(transform.right, toVector);
+            float viewCone = Vector2.Angle(transform.right, toVector);
+
+            // viewCone functionality
+            if (radius > 4 || viewCone > 45)
             {
-                shoot();
-                timeTillNextProjectile = projectilePeriod;
+                if (up == true && rigidBody.rotation <= top)
+                    up = false;
+                if (up == false && rigidBody.rotation >= bottom)
+                    up = true;
+                if (up == true)
+                    rigidBody.rotation -= rate;
+                if (up == false)
+                    rigidBody.rotation += rate;
             }
-        }
+            else
+            {
+                // make the rotation less precise
+                rigidBody.rotation += angleToTarget * rate / 6;
 
-        // decide the position of enemy relative to player's position
-        vecToPlayer = player.transform.position - transform.position;
-        
-        if(vecToPlayer.x <= 0)
-        {
-            isToPlayersRight = true;
-        }
-        else
-        {
-            isToPlayersRight = false;
+                // shoot every projectilePeriod time
+                if (timeTillNextProjectile <= 0)
+                {
+                    shoot();
+                    timeTillNextProjectile = projectilePeriod;
+                }
+            }
+
+            // decide the position of enemy relative to player's position
+            vecToPlayer = player.transform.position - transform.position;
+
+            if (vecToPlayer.x <= 0)
+            {
+                isToPlayersRight = true;
+            }
+            else
+            {
+                isToPlayersRight = false;
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        // determine the angle of shooting the bullet
-        var rise = this.transform.position.y - player.transform.position.y;
-        var run = this.transform.position.x - player.transform.position.x;
-        bulletAngle = Mathf.Rad2Deg * Mathf.Atan(rise / run);
+        if (player != null)
+        {
+            // determine the angle of shooting the bullet
+            var rise = this.transform.position.y - player.transform.position.y;
+            var run = this.transform.position.x - player.transform.position.x;
+            bulletAngle = Mathf.Rad2Deg * Mathf.Atan(rise / run);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        KillCounter.kill();
     }
 
     void shoot() {

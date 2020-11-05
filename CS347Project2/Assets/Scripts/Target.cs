@@ -9,7 +9,6 @@ public class Target : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print("fuck my ass");
         if (collision.gameObject == target2)
             target = collision.gameObject;
         

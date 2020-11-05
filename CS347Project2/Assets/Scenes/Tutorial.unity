@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 10.478821, y: -0.894928}
-  m_SizeDelta: {x: 702, y: 435}
+  m_SizeDelta: {x: 10000, y: 10000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &10257701
 MonoBehaviour:
@@ -315,12 +315,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 327958591}
+  deathScreen: {fileID: 0}
   cam: {fileID: 0}
-  stickyFactor: 1
+  countDisplay: {fileID: 0}
+  stickyFactor: 0.5
   verticalMargin: 0.25
   horizontalMargin: 0.25
-  max_speed: 5
-  camera_speed: 3
+  max_speed: 10
+  camera_speed: 5
 --- !u!50 &93283378
 Rigidbody2D:
   serializedVersion: 4
@@ -1848,7 +1850,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.000030518, y: 0}
-  m_SizeDelta: {x: 702, y: 435}
+  m_SizeDelta: {x: 10000, y: 10000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1929828431
 PrefabInstance:
