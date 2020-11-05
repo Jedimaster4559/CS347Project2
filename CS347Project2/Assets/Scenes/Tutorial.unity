@@ -449,7 +449,7 @@ MonoBehaviour:
   healthConfig:
     translateX: 0
     translateY: 0.6
-    healthBarColor: {r: 1, g: 0, b: 0, a: 1}
+    healthBarColor: {r: 1, g: 0.38113207, b: 0.93711966, a: 1}
   currentHealth: 0
 --- !u!114 &327958593
 MonoBehaviour:

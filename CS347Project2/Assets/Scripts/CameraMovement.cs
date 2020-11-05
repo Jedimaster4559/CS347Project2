@@ -12,15 +12,15 @@ public class CameraMovement : MonoBehaviour
     public GameObject deathScreen;
     public Camera cam;
     public Text countDisplay;
-    public float stickyFactor = 1;
+    public float stickyFactor = 2;
 
     // Margins to represent how close to the edge the player can get
     // to the edge. These values are as percentages. That means that
     // if you set the value to 0.25, the player will be free to move
     // in the middle 50% of the screen, however the camera will move
     // towards them if they leave that area.
-    public float verticalMargin = 0.25f;
-    public float horizontalMargin = 0.25f;
+    public float verticalMargin = 0.4f;
+    public float horizontalMargin = 0.4f;
     public float max_speed = 5;
     // The square bounds of the bounding box
     private float topBound;

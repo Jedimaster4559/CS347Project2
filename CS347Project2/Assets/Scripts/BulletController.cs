@@ -79,21 +79,14 @@ public class BulletController : MonoBehaviour
 
         if (!collision.gameObject.GetComponent<Scout>() && !collision.gameObject.GetComponent<BulletController>())
         {
-            if (collision.gameObject.GetComponent<PlayerController>())
-            {
-                // minus 6.0 bullet damage if get hit
                 Health health = collision.gameObject.GetComponent<Health>();
                 if (health != null)
                 {
                     health.Damage(bulletDamage);
                 }
-            }
+            
             // bullet will be destroied colliding into anything other than enemy and other bullets
             Destroy(this.gameObject);
-        }
-        else
-        {
-            // bullet won't be destroied colliding into enemy and other bullets
         }
     }
 }

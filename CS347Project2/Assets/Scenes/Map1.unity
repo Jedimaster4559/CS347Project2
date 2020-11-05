@@ -954,8 +954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 70
+  startingHealth: 70
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -1715,8 +1715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 70
+  startingHealth: 70
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -2724,9 +2724,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290324f3341401445bc3c9a9eaaf2b23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  speed: 20
-  rigidBody: {fileID: 0}
 --- !u!1 &618026470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2899,7 +2896,7 @@ MonoBehaviour:
   healthConfig:
     translateX: 0
     translateY: 0.6
-    healthBarColor: {r: 0, g: 0, b: 1, a: 1}
+    healthBarColor: {r: 0.9489182, g: 0.443681, b: 0.9716981, a: 1}
   currentHealth: 0
 --- !u!1001 &624393445
 PrefabInstance:
@@ -3172,8 +3169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
-  startingHealth: 120
+  maxHealth: 90
+  startingHealth: 90
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -3288,8 +3285,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 90
+  startingHealth: 90
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -4608,8 +4605,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 90
+  startingHealth: 90
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -5577,7 +5574,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5906,8 +5903,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 70
+  startingHealth: 70
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -7749,8 +7746,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 70
+  startingHealth: 70
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -7977,8 +7974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 90
+  startingHealth: 90
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -8203,8 +8200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 70
+  startingHealth: 70
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -8461,8 +8458,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 40
-  startingHealth: 40
+  maxHealth: 90
+  startingHealth: 90
   showHealthBar: 0
   healthConfig:
     translateX: 0
