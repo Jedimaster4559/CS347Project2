@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Tutorial_Move
+  - Tutorial_Throw
+  - Tutorial_Kill
   layers:
   - Default
   - TransparentFX
