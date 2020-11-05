@@ -24,8 +24,8 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     // shooting bullet properties
-    public float speed = 0.5f;
-    public float bulletDamage = 6.0f;
+    public float speed = 0.7f;
+    public float bulletDamage = 7.0f;
 
     // GameObjects
     public GameObject enemy;
@@ -39,9 +39,6 @@ public class BulletController : MonoBehaviour
     [SerializeField]
     private float bulletAllowedTime = 10.0f;
     private float timeTillDestroy;
-
-    // serialized property 
-    private SerializedProperty playerHealth;
 
     // Start is called before the first frame update
     void Start()
@@ -82,21 +79,14 @@ public class BulletController : MonoBehaviour
 
         if (!collision.gameObject.GetComponent<Scout>() && !collision.gameObject.GetComponent<BulletController>())
         {
-            if (collision.gameObject.GetComponent<PlayerController>())
-            {
-                // minus 6.0 bullet damage if get hit
                 Health health = collision.gameObject.GetComponent<Health>();
                 if (health != null)
                 {
                     health.Damage(bulletDamage);
                 }
-            }
+            
             // bullet will be destroied colliding into anything other than enemy and other bullets
             Destroy(this.gameObject);
-        }
-        else
-        {
-            // bullet won't be destroied colliding into enemy and other bullets
         }
     }
 }

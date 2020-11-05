@@ -37,11 +37,11 @@ public class Throwable : MonoBehaviour
 
     // Public Elements
     public float mass = 1;
-    public float suctionFactor = 1;
+    public float suctionFactor = 2;
     public float rotationFactor = 1;
     public float angularDrag = 1;
     public float linearDrag = 1;
-    public float speedBoost = 1.5f;
+    public float speedBoost = 2.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -74,10 +74,15 @@ public class Throwable : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         HandleInput();
+    }
+
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         HandleMovement();
         CalculateDamage();
     }
@@ -197,14 +202,14 @@ public class Throwable : MonoBehaviour
         {
             Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 vectorToTarget = mousePosition - gameObject.transform.position;
-            if (rigidBody.velocity.magnitude<max_speed)
-                rigidBody.AddForce(vectorToTarget * suctionFactor, ForceMode2D.Force);
+            if (rigidBody.velocity.magnitude<max_speed*2)
+                rigidBody.AddForce(vectorToTarget * suctionFactor * 2, ForceMode2D.Force);
         }
         else
         {
             curve_vector = new Vector2(-o_vector.y, o_vector.x); // This gets a vector from the release point, and flips it 90 degrees
             rigidBody.AddForce(rigidBody.angularVelocity / 1000 * curve_vector, ForceMode2D.Force); // This uses that curve vector, the direction of angular velocity to determine curve direction
-            if (rigidBody.velocity.magnitude < 2*mass)
+            if (rigidBody.velocity.magnitude < mass)
             {
                 rigidBody.velocity = new Vector2(0, 0);
                 rigidBody.angularVelocity = 0;
@@ -218,7 +223,7 @@ public class Throwable : MonoBehaviour
     /// </summary>
     void CalculateDamage()
     {
-        damage = rigidBody.velocity.magnitude * mass + Mathf.Abs(rigidBody.angularVelocity) / 100 * mass;
+        damage = (rigidBody.velocity.magnitude * mass + Mathf.Abs(rigidBody.angularVelocity) / 200 * mass)/2;
     }
 
     // Called when this object collides with another game object that has collision enabled.

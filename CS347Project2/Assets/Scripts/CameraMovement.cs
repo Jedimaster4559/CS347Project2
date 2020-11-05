@@ -2,21 +2,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
     // The target object to follow
     public GameObject target;
+    public GameObject deathScreen;
     public Camera cam;
-    public float stickyFactor = 1;
+    public Text countDisplay;
+    public float stickyFactor = 2;
 
     // Margins to represent how close to the edge the player can get
     // to the edge. These values are as percentages. That means that
     // if you set the value to 0.25, the player will be free to move
     // in the middle 50% of the screen, however the camera will move
     // towards them if they leave that area.
-    public float verticalMargin = 0.25f;
-    public float horizontalMargin = 0.25f;
+    public float verticalMargin = 0.4f;
+    public float horizontalMargin = 0.4f;
     public float max_speed = 5;
     // The square bounds of the bounding box
     private float topBound;
@@ -48,6 +52,10 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(target == null)
+        {
+            HandleDeath();
+        }
         KeepInBorders();
     }
 
@@ -112,5 +120,18 @@ public class CameraMovement : MonoBehaviour
         }
         rigidBody.velocity += updateVector * (stickyFactor / 10);//Updates the velocity of the camera
         
+    }
+
+    void HandleDeath()
+    {
+        deathScreen.SetActive(true);
+        countDisplay.text = "Guard Kill Count: " + KillCounter.counter;
+        target = this.gameObject;
+        Invoke("RestartScene", 15f);
+    }
+
+    void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

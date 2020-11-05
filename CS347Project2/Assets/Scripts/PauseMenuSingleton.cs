@@ -18,6 +18,8 @@ public class PauseMenuSingleton : MonoBehaviour
         } else
         {
             instance = this;
+
+            this.gameObject.SetActive(false);
         }
     }
 
