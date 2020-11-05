@@ -954,8 +954,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  startingHealth: 100
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -1715,8 +1715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  startingHealth: 100
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -3288,8 +3288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
-  startingHealth: 120
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -4608,8 +4608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
-  startingHealth: 120
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -5906,8 +5906,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  startingHealth: 100
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -7749,8 +7749,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  startingHealth: 100
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -7977,8 +7977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
-  startingHealth: 120
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -8203,8 +8203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  startingHealth: 100
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0
@@ -8461,8 +8461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cbea615f0c187b47922d33d607a2785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 120
-  startingHealth: 120
+  maxHealth: 40
+  startingHealth: 40
   showHealthBar: 0
   healthConfig:
     translateX: 0

@@ -77,7 +77,7 @@ public class Scout : MonoBehaviour
             float viewCone = Vector2.Angle(transform.right, toVector);
 
             // viewCone functionality
-            if (radius > 4 || viewCone > 45)
+            if (radius > 6 || viewCone > 60)
             {
                 if (up == true && rigidBody.rotation <= top)
                     up = false;

@@ -24,8 +24,8 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     // shooting bullet properties
-    public float speed = 0.5f;
-    public float bulletDamage = 6.0f;
+    public float speed = 0.7f;
+    public float bulletDamage = 7.0f;
 
     // GameObjects
     public GameObject enemy;
