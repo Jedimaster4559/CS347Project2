@@ -74,10 +74,15 @@ public class Throwable : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         HandleInput();
+    }
+
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         HandleMovement();
         CalculateDamage();
     }

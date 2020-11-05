@@ -272,8 +272,8 @@ MonoBehaviour:
     powerful.
 
 
-    The lights flash on and you find yourself in about to begin to
-    play with your new skills...'
+    The lights flash on and you find yourself about to begin to learn
+    your new skills...'
 --- !u!222 &67748504
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2000,7 +2000,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 702, y: 435}
+  m_SizeDelta: {x: 10000, y: 10000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2039988897
 MonoBehaviour:
